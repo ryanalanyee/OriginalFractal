@@ -1,20 +1,27 @@
-int value = 0;
-int numSubStars = 500;
-
 void setup() {
-  size(800, 800);
-  background(100);
-}
-
-void draw() {
-  background(100);
-  fill(255);
-  translate(400, 400);
-  myStar(0, 0, 300);
+  background(0);
+  size(600, 600);
+  sierpinski(0, 0, 600, 600); 
 }
 
 void mousePressed() {
-  value = 0;
+  background(0);
+  sierpinski(0, 0, 600, 600); 
+}
+
+void draw(){
+
+}
+
+public void sierpinski(int x, int y, int h, int w){
+  if (h < 1 || w < 1) {
+    return;
+  }
+  
+  myStar(x + w/2, y + h/2, w); 
+
+  sierpinski(x, y + h/4, h/2, w/2); 
+  sierpinski(x + w/2, y + h/4, h/2, w/2); 
 }
 
 void myStar(float x, float y, float size) {
@@ -22,7 +29,7 @@ void myStar(float x, float y, float size) {
   drawStar(x, y, size, size/3, 5);
   float subStarSize = size / 20;
 
-  for (int i = 0; i < numSubStars; i++) {
+  for (int i = 0; i < 500; i++) {
     float angle = random(TWO_PI);
     float newX = x + cos(angle) * size * 0.3;
     float newY = y + sin(angle) * size * 0.3;
